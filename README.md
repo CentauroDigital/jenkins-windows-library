@@ -17,22 +17,20 @@ powershell.exec('ls')
 ```
 
 ## Library progress
-### Powershell
+#### Powershell
 - [x] Execute commands
-### File System
+#### File System
 - [ ] Manage files and folders in the windows node
 - [ ] Manage files and folders on a remote windows host
 - [ ] Copy files from the windows node to a windows remote machine
 - [ ] Copy artifacts from a job to a windows remote machine
-### Windows services
-Add the support to manage windows services in a jenkins pipeline.
+#### Windows services
 - [ ] Start
 - [ ] Stop
 - [ ] Check if exists
 - [ ] Uninstall
 - [ ] Install
-### Internet Information Services (IIS)
-Support on managing a Internet Information Services (IIS) on a jenkins pipeline
+#### Internet Information Services (IIS)
 - [ ] Start IIS
 - [ ] Stop IIS
 - [ ] Restart IIS
