@@ -6,7 +6,7 @@ The main intent of this library is to help a configuration management team to ma
 
 This library is being initialy designed all around the powershell capabilities. So it initialy will only support running on windows based nodes.
 
-## Current support
+## Features
 ### Powershell
 Support windows powershell commands.
 
@@ -16,30 +16,31 @@ Execute a powershell command on the runnig node.
 powershell.exec('ls')
 ```
 
-## To-Do
+## Library progress
+### Powershell
+- [x] Execute commands
 ### File System
-Capabilities do manage files and folders on windows nodes and remote windows machines.
-- Manage files and folders in the windows node
-- Manage files and folders on a remote windows host
-- Copy files from the windows node to a windows remote machine
-- Copy artifacts from a job to a windows remote machine
+- [ ] Manage files and folders in the windows node
+- [ ] Manage files and folders on a remote windows host
+- [ ] Copy files from the windows node to a windows remote machine
+- [ ] Copy artifacts from a job to a windows remote machine
 ### Windows services
 Add the support to manage windows services in a jenkins pipeline.
-- Start
-- Stop
-- Check if exists
-- Uninstall
-- Install
+- [ ] Start
+- [ ] Stop
+- [ ] Check if exists
+- [ ] Uninstall
+- [ ] Install
 ### Internet Information Services (IIS)
 Support on managing a Internet Information Services (IIS) on a jenkins pipeline
-- Start IIS
-- Stop IIS
-- Restart IIS
-- Start application pool
-- Stop application pool
-- Create web site
-- Remove web site
-- Edit web site
-- Create application pool
-- Remove application pool
-- Edis application pool
+- [ ] Start IIS
+- [ ] Stop IIS
+- [ ] Restart IIS
+- [ ] Start application pool
+- [ ] Stop application pool
+- [ ] Create web site
+- [ ] Remove web site
+- [ ] Edit web site
+- [ ] Create application pool
+- [ ] Remove application pool
+- [ ] Edis application pool
