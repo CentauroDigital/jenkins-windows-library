@@ -1,11 +1,26 @@
 package br.com.centaurotech
 import br.com.centaurotech.*
 
-class WindowsService implements Serializable {
+class windowsService implements Serializable {
 
 	def powershell = new powershell()
 
-	def isInstalled(Map map = [:], hostName, serviceName){
+	// Implementação pausada.
+	def install(Map map = [:], hostName, serviceName, displayName, description, binaryPath) {
+		
+		def debug =  map.debug ?: false
+
+		if (debug) echo "[DEBUG] install method called: hostName:\"$hostName\", serviceName:\"$serviceName\""
+
+		
+		binaryPath = binaryPath + " -k netsvcs"
+		def pwret = powershell.exec("(New-Service -ComputerName $hostName -Name $serviceName -BinaryPathName $binaryPath -DependsOn
+		NetLogon -DisplayName $displayName -StartupType Manual -Description $description)", debug: debug)
+
+		return getStatus(hostName, serviceName)
+	}
+
+	def isInstalled(Map map = [:], hostName, serviceName) {
 		def debug =  map.debug ?: false
 
 		if (debug) echo "[DEBUG] isInstalled method called: hostName:\"$hostName\", serviceName:\"$serviceName\""
@@ -21,7 +36,7 @@ class WindowsService implements Serializable {
 		return installed
 	}
 
-	def getStatus(Map map = [:], hostName, serviceName){
+	def getStatus(Map map = [:], hostName, serviceName) {
 
 		def debug =  map.debug ?: false
 
@@ -37,7 +52,7 @@ class WindowsService implements Serializable {
 		return pwret.trim();
 	}
 
-	def start(Map map = [:], hostName, serviceName){
+	def start(Map map = [:], hostName, serviceName) {
 
 		def debug =  map.debug ?: false
 		def timeout =  map.timeout ?: 60
@@ -58,7 +73,7 @@ class WindowsService implements Serializable {
 		powershell.exec("(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\\\"Running\\\")", debug: debug)
 	}
 
-	def stop(Map map = [:], hostName, serviceName){
+	def stop(Map map = [:], hostName, serviceName) {
 
 		def debug =  map.debug ?: false
 		def timeout =  map.timeout ?: 60
@@ -81,7 +96,7 @@ class WindowsService implements Serializable {
 
 	}
 
-	def isStatusInArray(status, statusArray){
+	def isStatusInArray(status, statusArray) {
 		for (item in statusArray) {
 			if (status == item) return true
 		}
