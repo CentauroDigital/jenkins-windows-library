@@ -1,21 +1,5 @@
 package br.com.centaurotech
 
-// Implementação pausada.
-def install(Map map = [:], hostName, serviceName, displayName, description, binaryPath) {
-	def powershell = new br.com.centaurotech.powershell()
-
-	def debug =  map.debug ?: false
-
-	if (debug) echo "[DEBUG] install method called: hostName:\"$hostName\", serviceName:\"$serviceName\""
-
-	
-	binaryPath = binaryPath + " -k netsvcs"
-	def pwret = powershell.exec("(New-Service -ComputerName $hostName -Name $serviceName -BinaryPathName $binaryPath -DependsOn
-	NetLogon -DisplayName $displayName -StartupType Manual -Description $description)", debug: debug)
-
-	return getStatus(hostName, serviceName)
-}
-
 def isInstalled(Map map = [:], hostName, serviceName) {
 	def powershell = new br.com.centaurotech.powershell()
 
