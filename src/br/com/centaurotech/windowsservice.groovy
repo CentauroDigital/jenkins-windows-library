@@ -1,9 +1,8 @@
 package br.com.centaurotech
-import br.com.centaurotech.*
 
 class windowsService implements Serializable {
 
-	def powershell = new powershell()
+	def powershell = new br.com.centaurotech.powershell()
 
 	// Implementação pausada.
 	def install(Map map = [:], hostName, serviceName, displayName, description, binaryPath) {
