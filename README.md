@@ -71,7 +71,7 @@ windowsservice.stop('localhost', 'wmiApSrv')
 - [x] Stop
 - [x] Check if exists
 - [x] Uninstall
-- [x] Install
+- [ ] Install
 #### File System
 - [ ] Manage files and folders in the windows node
 - [ ] Manage files and folders on a remote windows host
