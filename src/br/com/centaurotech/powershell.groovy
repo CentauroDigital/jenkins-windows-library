@@ -2,6 +2,8 @@ package br.com.centaurotech
 
 def exec(Map map = [:], command) {
 	
+	command = command.replaceAll('"','\\"');
+
 	def debug =  map.debug ?: false
 
 	if (debug) echo "[DEBUG] powershell method called with parameter: \n $command"
