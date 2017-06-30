@@ -5,7 +5,7 @@ def isInstalled(Map map = [:], hostName, serviceName) {
 
 	if (debug) echo "[DEBUG] isInstalled method called: hostName:\"$hostName\", serviceName:\"$serviceName\""
 	
-	def pwret = powershell("(get-service -ComputerName $hostName | Where-Object {\$_.name -eq \\\"$serviceName\\\"})", debug: debug)
+	def pwret = powershell returnStdout: true, script:"(get-service -ComputerName $hostName | Where-Object {\$_.name -eq \"$serviceName\"})"
 	def installed = (pwret.trim().length() > 0)
 
 	if (debug) {
@@ -24,7 +24,7 @@ def getStatus(Map map = [:], hostName, serviceName) {
 	if(!isInstalled(hostName, serviceName, debug: debug)) error "Windows service $serviceName is not installed on $hostName"
 
 	if (debug) echo "[DEBUG] Checking $serviceName status."
-	def pwret = powershell("(get-service -ComputerName $hostName -Name $serviceName).Status", debug: debug)
+	def pwret =  powershell returnStdout: true, script:"(get-service -ComputerName $hostName -Name $serviceName).Status"
 
 	if (debug) echo "[DEBUG] $serviceName is $pwret"
 
@@ -45,10 +45,10 @@ def start(Map map = [:], hostName, serviceName) {
 
 	if(isStatusInArray(status, statusToStart)){
 		if (debug) echo "[DEBUG] Starting $serviceName..."
-		powershell("(get-service -ComputerName $hostName -Name $serviceName).Start()", debug: debug)
+		powershell "(get-service -ComputerName $hostName -Name $serviceName).Start()"
 	}
 
-	powershell("(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\\\"Running\\\")", debug: debug)
+	powershell "(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\\\"Running\\\")"
 }
 
 def stop(Map map = [:], hostName, serviceName) {
@@ -66,10 +66,10 @@ def stop(Map map = [:], hostName, serviceName) {
 
 	if(isStatusInArray(status, statusToStop)){
 		if (debug) echo "[DEBUG] Stopping $serviceName..."
-		powershell("(get-service -ComputerName $hostName -Name $serviceName).Stop()", debug: debug)
+		powershell "(get-service -ComputerName $hostName -Name $serviceName).Stop()"
 	}
 
-	powershell("(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\\\"Stopped\\\")", debug: debug)
+	powershell "(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\\\"Stopped\\\")"
 }
 
 def isStatusInArray(status, statusArray) {
