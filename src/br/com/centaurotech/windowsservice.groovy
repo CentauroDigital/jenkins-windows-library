@@ -1,13 +1,11 @@
 package br.com.centaurotech
 
 def isInstalled(Map map = [:], hostName, serviceName) {
-	def powershell = new br.com.centaurotech.powershell()
-
 	def debug =  map.debug ?: false
 
 	if (debug) echo "[DEBUG] isInstalled method called: hostName:\"$hostName\", serviceName:\"$serviceName\""
 	
-	def pwret = powershell.exec("(get-service -ComputerName $hostName | Where-Object {\$_.name -eq \\\"$serviceName\\\"})", debug: debug)
+	def pwret = powershell("(get-service -ComputerName $hostName | Where-Object {\$_.name -eq \\\"$serviceName\\\"})", debug: debug)
 	def installed = (pwret.trim().length() > 0)
 
 	if (debug) {
@@ -19,8 +17,6 @@ def isInstalled(Map map = [:], hostName, serviceName) {
 }
 
 def getStatus(Map map = [:], hostName, serviceName) {
-	def powershell = new br.com.centaurotech.powershell()
-
 	def debug =  map.debug ?: false
 
 	if (debug) echo "[DEBUG] getStatus method called: hostName:\"$hostName\", serviceName:\"$serviceName\", debug:\"$debug\""
@@ -28,7 +24,7 @@ def getStatus(Map map = [:], hostName, serviceName) {
 	if(!isInstalled(hostName, serviceName, debug: debug)) error "Windows service $serviceName is not installed on $hostName"
 
 	if (debug) echo "[DEBUG] Checking $serviceName status."
-	def pwret = powershell.exec("(get-service -ComputerName $hostName -Name $serviceName).Status", debug: debug)
+	def pwret = powershell("(get-service -ComputerName $hostName -Name $serviceName).Status", debug: debug)
 
 	if (debug) echo "[DEBUG] $serviceName is $pwret"
 
@@ -36,8 +32,6 @@ def getStatus(Map map = [:], hostName, serviceName) {
 }
 
 def start(Map map = [:], hostName, serviceName) {
-	def powershell = new br.com.centaurotech.powershell()
-
 	def debug =  map.debug ?: false
 	def timeout =  map.timeout ?: 60
 
@@ -51,15 +45,13 @@ def start(Map map = [:], hostName, serviceName) {
 
 	if(isStatusInArray(status, statusToStart)){
 		if (debug) echo "[DEBUG] Starting $serviceName..."
-		powershell.exec("(get-service -ComputerName $hostName -Name $serviceName).Start()", debug: debug)
+		powershell("(get-service -ComputerName $hostName -Name $serviceName).Start()", debug: debug)
 	}
 
-	powershell.exec("(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\\\"Running\\\")", debug: debug)
+	powershell("(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\\\"Running\\\")", debug: debug)
 }
 
 def stop(Map map = [:], hostName, serviceName) {
-	def powershell = new br.com.centaurotech.powershell()
-
 	def debug =  map.debug ?: false
 	def timeout =  map.timeout ?: 60
 	def force =  map.force ?: false
@@ -74,10 +66,10 @@ def stop(Map map = [:], hostName, serviceName) {
 
 	if(isStatusInArray(status, statusToStop)){
 		if (debug) echo "[DEBUG] Stopping $serviceName..."
-		powershell.exec("(get-service -ComputerName $hostName -Name $serviceName).Stop()", debug: debug)
+		powershell("(get-service -ComputerName $hostName -Name $serviceName).Stop()", debug: debug)
 	}
 
-	powershell.exec("(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\\\"Stopped\\\")", debug: debug)
+	powershell("(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\\\"Stopped\\\")", debug: debug)
 }
 
 def isStatusInArray(status, statusArray) {
