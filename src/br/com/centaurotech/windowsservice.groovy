@@ -48,7 +48,7 @@ def start(Map map = [:], hostName, serviceName) {
 		powershell "(get-service -ComputerName $hostName -Name $serviceName).Start()"
 	}
 
-	powershell "(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\\\"Running\\\")"
+	powershell "(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\"Running\")"
 }
 
 def stop(Map map = [:], hostName, serviceName) {
@@ -69,7 +69,7 @@ def stop(Map map = [:], hostName, serviceName) {
 		powershell "(get-service -ComputerName $hostName -Name $serviceName).Stop()"
 	}
 
-	powershell "(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\\\"Stopped\\\")"
+	powershell "(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\"Stopped\")"
 }
 
 def isStatusInArray(status, statusArray) {
