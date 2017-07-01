@@ -7,27 +7,21 @@ The main intent of this library is to help a configuration management team to ma
 This library is being initialy designed all around the powershell capabilities. So it initialy will only support running on windows based nodes.
 
 ## How to use it
+### Dependencies
+This library relies on the jenkins powershell plugin. Your jenkins must have this the plugin installed. To know more about the plugin visit [PowerShell Plugin](https://wiki.jenkins.io/display/JENKINS/PowerShell+Plugin) page.
+### Installing
 To use this library you must add the library github source on your jenkins. Follow the instructions from this page: [Using libraries](https://jenkins.io/doc/book/pipeline/shared-libraries/#using-libraries)
 
-After add the following line to your groovy script:
+### Using
+To use the library in one job add the line below at the start of your plugin.
 ```groovy
 @Library('my-library-name') _
 ```
-*Note that the library bame must be the same added on the jenkins.*
+> Note that the library name must be the same added on the jenkins.
 
-
+If you plan on using the library on your entire Jenkins at the library settings select the _Load implicitly_ option.
 
 ## Features
-### Powershell
-Support windows powershell commands.
-
-#### Exec
-Execute a powershell command on the runnig node.
-```groovy
-powershell.exec ls
-//or
-powershell.exec('ls')
-```
 
 ### Windows services
 Manage windows services on remote machines inside a jenkins pipeline.
@@ -64,8 +58,6 @@ windowsservice.stop 'localhost', 'wmiApSrv'
 windowsservice.stop('localhost', 'wmiApSrv')
 ```
 ## Roadmap
-#### Powershell
-- [x] Execute commands
 #### Windows services
 - [x] Start
 - [x] Stop
