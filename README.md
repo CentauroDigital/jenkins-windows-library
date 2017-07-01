@@ -84,6 +84,3 @@ windowsservice.stop('localhost', 'wmiApSrv')
 
 ## Access control
 Since the library is executed on the context of the jenkins windows service node, the user running the server must have the correct rights to execute the actions on the remote machine. On a domain based network use a domain user to run the jenkins windows service and give this user the needed access on the managed hosts. If you are not in a domain based network just create a user with the same username and password on the managed machines and give the rights needed access to this user.
-
-## Know issues
-1. The library is adding too much content to the console output.
