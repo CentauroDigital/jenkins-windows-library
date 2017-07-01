@@ -7,7 +7,7 @@ def isInstalled(Map map = [:], hostName, serviceName) {
 
 	if (debug) echo "[DEBUG] isInstalled method called: hostName:\"$hostName\", serviceName:\"$serviceName\""
 	
-	echo "Checking if the service $serviceName is installed on $hostName host."
+	if(!supressOutput) echo "Checking if the service $serviceName is installed on $hostName host."
 
 	def pwret = powershell returnStdout: true, script:"(get-service -ComputerName $hostName | Where-Object {\$_.name -eq \"$serviceName\"})"
 	def installed = (pwret.trim().length() > 0)
