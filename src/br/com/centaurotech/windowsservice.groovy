@@ -65,6 +65,7 @@ def start(Map map = [:], hostName, serviceName) {
 		powershell "(get-service -ComputerName $hostName -Name $serviceName).Start()"
 	}else{
 		echo "Service $serviceName alerady running on $hostName host."
+		return
 	}
 
 	powershell "(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\"Running\")"
@@ -89,6 +90,7 @@ def stop(Map map = [:], hostName, serviceName) {
 		powershell "(get-service -ComputerName $hostName -Name $serviceName).Stop()"
 	}else{
 		echo "Service $serviceName alerady stopped on $hostName host."
+		return
 	}
 
 	powershell "(get-service -ComputerName $hostName -Name $serviceName).WaitForStatus(\"Stopped\")"
