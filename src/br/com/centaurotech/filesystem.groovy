@@ -1,6 +1,6 @@
 package br.com.centaurotech
 
-def copy(Map map = [:], fromPath, toServer, toPath, extensions) {
+def copy(Map map = [:], fromPath, toServer, toPath, extensions = null) {
     def debug =  map.debug ?: false
 
     def exist = fileExist(map, fromPath)
