@@ -22,7 +22,7 @@ def copyFolder(Map map = [:], fromPath, toServer, toPath, extensions) {
             ext = ext.replace(".", "")
             if (debug) echo "[jenkins-windows-library file system] [DEBUG] Execute Command: Copy-Item $fromPath\*.${ext} -Destination \\\\$toServer\\$toPath"
 
-            powershell "Copy-Item $fromPath\*.${ext} -Destination \\\\$toServer\\$toPath"
+            powershell "Copy-Item $fromPath\\*.${ext} -Destination \\\\$toServer\\$toPath"
         }
     }
 }
