@@ -1,21 +1,21 @@
 package br.com.centaurotech
 
-def copy(Map map = [:], fromPath, toServer, toPath, extensions) {
+def copy(Map map = [:], fromPath, toPath, extensions) {
     def debug =  map.debug ?: false
 
     def exist = fileExist(map, fromPath)
     if (exist) {
         if (extensions == null) {
-            if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to server: $toServer, to path: $toPath .Command: Copy-Item \"$fromPath\" -Destination \"\\\\$toServer\\$toPath\" -recurse -Force"
-            powershell "Copy-Item \"$fromPath\" -Destination \"\\\\$toServer\\$toPath\" -recurse -Force"
+            if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to path: $toPath .Command: Copy-Item \"$fromPath\" -Destination \"$toPath\" -recurse -Force"
+            powershell "Copy-Item \"$fromPath\" -Destination \"$toPath\" -recurse -Force"
         } else {
-            if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to server: $toServer, to path: $toPath, extensions: $extensions"
+            if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to path: $toPath, extensions: $extensions"
 
             for (int i = 0; i < extensions.length; i++ ) {
                 def ext = extensions[i].replace(".", "")
 
-                if (debug) echo "[jenkins-windows-library file system] [DEBUG] Execute Command: Copy-Item \"$fromPath\"\\*.$ext -Destination \"\\\\$toServer\\$toPath\" -recurse -Force"
-                powershell "Copy-Item \"$fromPath\\*.$ext\" -Destination \"\\\\$toServer\\$toPath\" -recurse -Force"
+                if (debug) echo "[jenkins-windows-library file system] [DEBUG] Execute Command: Copy-Item \"$fromPath\\*.$ext\" -Destination \"$toPath\" -recurse -Force"
+                powershell "Copy-Item \"$fromPath\\*.$ext\" -Destination \"$toPath\" -recurse -Force"
             }
         }
     } else {
