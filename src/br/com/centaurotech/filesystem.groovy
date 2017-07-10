@@ -12,12 +12,12 @@ def copy(Map map = [:], fromPath, toServer, toPath, extensions) {
             if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to server: $toServer, to path: $toPath, extensions: $extensions"
 
             extensions.each { item ->
-                 def ext = item.replace(".", "")
+                println item
+
+                def ext = item.replace(".", "")
 
                 if (debug) echo "[jenkins-windows-library file system] [DEBUG] Execute Command: Copy-Item $fromPath\\*.$ext -Destination \\\\$toServer\\$toPath -recurse -Force"
                 powershell "Copy-Item $fromPath\\*.$ext -Destination \\\\$toServer\\$toPath -recurse -Force"
-
-                println item
             }
         }
     } else {
