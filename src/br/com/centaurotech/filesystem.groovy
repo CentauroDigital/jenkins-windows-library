@@ -37,6 +37,5 @@ def fileExist(Map map = [:], path) {
             exist = true
         }
     }
-    
     return exist
 }
