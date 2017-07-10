@@ -4,4 +4,8 @@ class filesystem implements Serializable {
     def copy(Map map = [:], fromPath, toServer, toPath, extensions) {
         _filesystem.copyFile(map, fromPath, toServer, toPath, extensions)
     }
+
+    def fileExist((Map map = [:], path) {
+        _filesystem.fileExist(path)
+    }
 }

@@ -25,5 +25,9 @@ def copy(Map map = [:], fromPath, toServer, toPath, extensions) {
 }
 
 def fileExist(path) {
-    return powershell "Test-Path $path"
+    def pwret = powershell returnStdout: true, script:"Test-Path $path"
+    echo "$pwret"
+
+	def installed = (pwret.trim() == True)
+    return installed
 }
