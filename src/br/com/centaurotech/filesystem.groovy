@@ -14,8 +14,6 @@ def copy(Map map = [:], fromPath, toServer, toPath, extensions) {
             for (int i = 0; i < extensions.length; i++ ) {
                 def ext = extensions[i].replace(".", "")
 
-                println "Copy-Item $fromPath\\*.$ext -Destination \\\\$toServer\\$toPath -recurse -Force"
-
                 if (debug) echo "[jenkins-windows-library file system] [DEBUG] Execute Command: Copy-Item $fromPath\\*.$ext -Destination \\\\$toServer\\$toPath -recurse -Force"
                 powershell "Copy-Item $fromPath\\*.$ext -Destination \\\\$toServer\\$toPath -recurse -Force"
             }
