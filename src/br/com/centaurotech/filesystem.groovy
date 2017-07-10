@@ -13,7 +13,7 @@ def copy(Map map = [:], fromPath, toServer, toPath, extensions) {
             def extensionsArray = extensions.split(',').collect{ext as String}
 
             for(item in extensionsArray) {
-                ext = item.replace(".", "")
+                def ext = item.replace(".", "")
 
                 if (debug) echo "[jenkins-windows-library file system] [DEBUG] Execute Command: Copy-Item $fromPath\\*.${ext} -Destination \\\\$toServer\\$toPath -recurse -Force"
                 powershell "Copy-Item $fromPath\\*.${ext} -Destination \\\\$toServer\\$toPath -recurse -Force"
