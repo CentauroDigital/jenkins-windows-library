@@ -31,6 +31,6 @@ def fileExist(Map map = [:],path) {
     def pwret = powershell returnStdout: true, script:"Test-Path $path"
     if (debug) echo "[jenkins-windows-library file system] [DEBUG] file exist method called: exist: $pwret"
 
-	def installed = (pwret.trim() == True)
-    return installed
+	def exist = (pwret.trim() == "true")
+    return exist
 }
