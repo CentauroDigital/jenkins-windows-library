@@ -7,9 +7,7 @@ def copy(Map map = [:], fromPath, toPath, extensions) {
     if (exist) {
         if (extensions == null) {
             if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to path: $toPath .Command: Copy-Item \"$fromPath\" -Destination \"$toPath\" -recurse -Force"
-
-            println "Copy-Item \"$fromPath\" -Destination \"$toPath\" -recurse -Force"
-
+            
             powershell "Copy-Item \"$fromPath\" -Destination \"$toPath\" -recurse -Force"
         } else {
             if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to path: $toPath, extensions: $extensions"
