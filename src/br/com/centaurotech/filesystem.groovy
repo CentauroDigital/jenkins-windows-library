@@ -3,7 +3,7 @@ package br.com.centaurotech
 def copy(Map map = [:], fromPath, toServer, toPath, extensions) {
     def debug =  map.debug ?: false
 
-    def exist = fileExist(fromPath)
+    def exist = fileExist(map, fromPath)
     if (exist) {
         if (extensions == null) {
             if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to server: $toServer, to path: $toPath .Command: Copy-Item $fromPath -Destination \\\\$toServer\\$toPath -recurse -Force"
@@ -24,9 +24,12 @@ def copy(Map map = [:], fromPath, toServer, toPath, extensions) {
     }
 }
 
-def fileExist(path) {
+def fileExist(Map map = [:],path) {
+    def debug =  map.debug ?: false
+    if (debug) echo "[jenkins-windows-library file system] [DEBUG] file exist method called: path: $path"
+
     def pwret = powershell returnStdout: true, script:"Test-Path $path"
-    echo "$pwret"
+    if (debug) echo "[jenkins-windows-library file system] [DEBUG] file exist method called: exist: $pwret"
 
 	def installed = (pwret.trim() == True)
     return installed
