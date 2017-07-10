@@ -28,8 +28,12 @@ def fileExist(Map map = [:], path) {
     def debug =  map.debug ?: false
     if (debug) echo "[jenkins-windows-library file system] [DEBUG] file exist method called: path: $path"
 
+    echo "[jenkins-windows-library file system] [DEBUG] file exist method called: path: $path"
+
     def pwret = powershell returnStdout: true, script:"Test-Path $path"
     if (debug) echo "[jenkins-windows-library file system] [DEBUG] file exist method called: exist: $pwret"
+
+    echo "[jenkins-windows-library file system] [DEBUG] file exist method called: exist: $pwret"
 
 	def exist = (pwret.trim() == "True")
     return exist
