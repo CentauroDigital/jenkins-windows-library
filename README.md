@@ -71,34 +71,36 @@ filesystem.copy debug:true, fromPath, toPath
 #### copy file
 Copy file to other directory
 ```groovy
-filesystem.copy 'C:\\Users\\Default\\file.txt', 'C:\\Users\\DefaultCopy'
+filesystem.copy 'C:\\Default\\file.txt', 'C:\\DefaultCopy'
 //or with debug param 
-filesystem.copy debug:true, 'C:\\Users\\Default\\file.txt', 'C:\\Users\\DefaultCopy'
+filesystem.copy debug:true, 'C:\\Default\\file.txt', 'C:\\DefaultCopy'
 ```
 
 #### copy folder
 Copy folder to other directory
 ```groovy
-filesystem.copy 'C:\\Users\\Default', 'C:\\Users\\DefaultCopy'
+filesystem.copy 'C:\\Default', 'C:\\DefaultCopy'
 //or with debug param 
-filesystem.copy debug:true, 'C:\\Users\\Default', 'C:\\Users\\DefaultCopy'
+filesystem.copy debug:true, 'C:\\Default', 'C:\\DefaultCopy'
 ```
 
 #### copy files by extension
 Copy all files in the folder according to the extension
 ```groovy
-filesystem.copy 'C:\\Users\\Default\\*.txt', 'C:\\Users\\DefaultCopy'
+filesystem.copy 'C:\\Default\\*.txt', 'C:\\DefaultCopy'
 //or with debug param 
-filesystem.copy debug:true, 'C:\\Users\\Default\\*.txt', 'C:\\Users\\DefaultCopy'
+filesystem.copy debug:true, 'C:\\Default\\*.txt', 'C:\\DefaultCopy'
 ```
 
 #### copy files from remote machine
 Copy files from remote machine to local directory
 ```groovy
-filesystem.copy '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\Users\\Default'
+filesystem.copy '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\Default'
 //or with debug param 
-filesystem.copy debug:true, '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\Users\\Default'
+filesystem.copy debug:true, '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\Default'
 ```
+
+> Note that the "\" bar is an escape character, so it should be duplicated.
 
 ## Roadmap
 #### Windows services
