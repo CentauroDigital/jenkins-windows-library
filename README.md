@@ -57,6 +57,50 @@ windowsservice.stop 'localhost', 'wmiApSrv'
 //or
 windowsservice.stop('localhost', 'wmiApSrv')
 ```
+
+### File System
+Manage Windows files on remote machines.
+Ex. filesystem.copy fromPath, toPath
+
+#### Example
+```groovy
+filesystem.copy fromPath, toPath
+//or with debug param 
+filesystem.copy debug:true, fromPath, toPath
+```
+
+#### copy file
+Copy file to other directory
+```groovy
+filesystem.copy 'C:\\Users\\Default\\file.txt', 'C:\\Users\\DefaultCopy'
+//or with debug param 
+filesystem.copy debug:true, 'C:\\Users\\Default\\file.txt', 'C:\\Users\\DefaultCopy'
+```
+
+#### copy folder
+Copy folder to other directory
+```groovy
+filesystem.copy 'C:\\Users\\Default', 'C:\\Users\\DefaultCopy'
+//or with debug param 
+filesystem.copy debug:true, 'C:\\Users\\Default', 'C:\\Users\\DefaultCopy'
+```
+
+#### copy files by extension
+Copy all files in the folder according to the extension
+```groovy
+filesystem.copy 'C:\\Users\\Default\\*.txt', 'C:\\Users\\DefaultCopy'
+//or with debug param 
+filesystem.copy debug:true, 'C:\\Users\\Default\\*.txt', 'C:\\Users\\DefaultCopy'
+```
+
+#### copy files from remote machine
+Copy files from remote machine to local directory
+```groovy
+filesystem.copy '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\Users\\Default'
+//or with debug param 
+filesystem.copy debug:true, '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\Users\\Default'
+```
+
 ## Roadmap
 #### Windows services
 - [x] Start
@@ -65,9 +109,9 @@ windowsservice.stop('localhost', 'wmiApSrv')
 - [x] Uninstall
 - [ ] Install
 #### File System
-- [ ] Manage files and folders in the windows node
-- [ ] Manage files and folders on a remote windows host
-- [ ] Copy files from the windows node to a windows remote machine
+- [x] Manage files and folders in the windows node
+- [x] Manage files and folders on a remote windows host
+- [x] Copy files from the windows node to a windows remote machine
 - [ ] Copy artifacts from a job to a windows remote machine
 #### Internet Information Services (IIS)
 - [ ] Start IIS
