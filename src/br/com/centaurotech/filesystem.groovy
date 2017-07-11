@@ -7,9 +7,6 @@ def copy(Map map = [:], fromPath, toPath, extensions) {
     if (exist) {
         if (extensions == null) {
             if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to path: $toPath .Command: Copy-Item \"$fromPath\" -Destination \"$toPath\" -recurse -Force"
-            
-            println "Copy-Item \"$fromPath\" -Destination \"$toPath\" -recurse -Force"
-
             powershell "Copy-Item \"$fromPath\" -Destination \"$toPath\" -recurse -Force"
         } else {
             if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to path: $toPath, extensions: $extensions"
@@ -18,8 +15,6 @@ def copy(Map map = [:], fromPath, toPath, extensions) {
                 def ext = extensions[i].replace(".", "")
 
                 if (debug) echo "[jenkins-windows-library file system] [DEBUG] Execute Command: Copy-Item \"$fromPath\\*.$ext\" -Destination \"$toPath\" -recurse -Force"
-
-                println "Copy-Item \"$fromPath\\*.$ext\" -Destination \"$toPath\" -recurse -Force"
                 powershell "Copy-Item \"$fromPath\\*.$ext\" -Destination \"$toPath\" -recurse -Force"
             }
         }
