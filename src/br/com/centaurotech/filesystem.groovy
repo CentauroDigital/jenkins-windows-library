@@ -5,8 +5,8 @@ def copy(Map map = [:], fromPath, toPath) {
 
     def exist = fileExist(map, fromPath)
     if (exist) {
-        if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to path: $toPath .Command: Copy-Item \"$fromPath\" -Destination \"$toPath\" -Recurse -Force"
-        powershell "Copy-Item \"$fromPath\" -Destination \"$toPath\" -Recurse -Force"
+        if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy method called: from path: $fromPath, to path: $toPath .Command: Copy-Item \"$fromPath\" -Destination (New-Item \"$toPath\" -Type container -Force) -Recurse -Force"
+        powershell "Copy-Item \"$fromPath\" -Destination (New-Item \"$toPath\" -Type container -Force) -Recurse -Force"
     } else {
         if (debug) echo "[jenkins-windows-library file system] [DEBUG] copy file method called: Error - $fromPath not exist"
     }
