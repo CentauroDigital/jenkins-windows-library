@@ -100,7 +100,7 @@ filesystem.copy '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\Default'
 filesystem.copy debug:true, '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\Default'
 ```
 
-> Note that the "\" bar is an escape character, so it should be duplicated.
+> Note that the "\\" bar is an escape character, so it should be duplicated.
 
 ## Roadmap
 #### Windows services
