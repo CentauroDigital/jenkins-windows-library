@@ -59,7 +59,7 @@ windowsservice.stop('localhost', 'wmiApSrv')
 ```
 
 ### File System
-Manage Windows files on remote machines.
+Manage Windows files inside a jenkins pipeline.
 
 #### Example
 ```groovy
