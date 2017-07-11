@@ -60,7 +60,6 @@ windowsservice.stop('localhost', 'wmiApSrv')
 
 ### File System
 Manage Windows files on remote machines.
-Ex. filesystem.copy fromPath, toPath
 
 #### Example
 ```groovy
