@@ -51,6 +51,7 @@ def getStatus(Map map = [:], hostName, serviceName) {
 def start(Map map = [:], hostName, serviceName) {
 	def debug =  map.debug ?: false
 	def timeout =  map.timeout ?: 60
+	def common = new common()
 
 	if (debug) echo "[jenkins-windows-library windows service] [DEBUG] stop method called: hostName:\"$hostName\", serviceName:\"$serviceName\", timeout:\"$timeout\", debug:\"$debug\""
 
@@ -58,9 +59,9 @@ def start(Map map = [:], hostName, serviceName) {
 
 	def status = getStatus(hostName, serviceName, debug: debug, supressOutput: true)
 
-	def statusToStart = ["Stopped", "StopPending", "ContinuePending", "PausePending", "Paused"]
+	def statusToStart = common.getstatusToStart()
 
-	if(isStatusInArray(status, statusToStart)){
+	if(common.isStatusInArray(status, statusToStart)){
 		echo "[jenkins-windows-library windows service] Starting the service $serviceName on $hostName host."
 		powershell "(get-service -ComputerName $hostName -Name $serviceName).Start()"
 	}else{
@@ -76,6 +77,7 @@ def stop(Map map = [:], hostName, serviceName) {
 	def debug =  map.debug ?: false
 	def timeout =  map.timeout ?: 60
 	def force =  map.force ?: false
+	def common = new common()
 
 	if (debug) echo "[jenkins-windows-library windows service] [DEBUG] stop method called: hostName:\"$hostName\", serviceName:\"$serviceName\", force:\"$force\", timeout:\"$timeout\", debug:\"$debug\""
 
@@ -83,9 +85,9 @@ def stop(Map map = [:], hostName, serviceName) {
 	
 	def status = getStatus(hostName, serviceName, debug: debug, supressOutput: true)
 	
-	def statusToStop = ["Running", "StartPending", "ContinuePending", "PausePending", "Paused"]
+	def statusToStop = common.getStatusToStop()
 
-	if(isStatusInArray(status, statusToStop)){
+	if(common.isStatusInArray(status, statusToStop)){
 		echo "[jenkins-windows-library windows service] Stopping the service $serviceName on $hostName host."
 		powershell "(get-service -ComputerName $hostName -Name $serviceName).Stop()"
 	}else{
@@ -97,9 +99,3 @@ def stop(Map map = [:], hostName, serviceName) {
 	echo "[jenkins-windows-library windows service] Service $serviceName stopped on $hostName host."
 }
 
-def isStatusInArray(status, statusArray) {
-	for (item in statusArray) {
-		if (status == item) return true
-	}
-	return false
-}
