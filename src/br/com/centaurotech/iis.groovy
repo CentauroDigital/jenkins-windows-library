@@ -187,3 +187,66 @@ def getAppPoolState(Map map = [:], pool, server) {
         }
     }
 }
+
+
+def webSiteExist(Map map = [:], site, server) {
+    def debug =  map.debug ?: false
+    def exist =  false
+
+    if (server == null) {
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] WebSite exist method called. WebSite: $site . Command: Test-Path \"IIS:\\\\Sites\\$site\""
+ 
+        def pwret = powershell returnStdout: true, script:"Test-Path \"IIS:\\\\Sites\\$site\""
+        if (pwret.trim() == "True") {
+            exist = true
+        }
+    } else {
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] WebSite exist method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { Test-Path \"IIS:\\\\Sites\\$site\" }"
+
+        def pwret = powershell returnStdout: true, script:"Invoke-Command -ComputerName \"$server\" -ScriptBlock { Test-Path \"IIS:\\\\Sites\\$site\" }"
+        if (pwret.trim() == "True") {
+            exist = true
+        }
+    }
+
+    return exist
+}
+
+def newWebSite(Map map[:], site, server){
+    def debug =  map.debug ?: false
+
+    def exist = webSiteExist(map, site, server)
+    if (exist == true) {
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] new Web Site method called. Web Site: $site . Message: Web Site already exists"
+    } else {
+        if (server == null) {
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] new Web Site method called. Web Site: $site . Command: New-WebSite -Name \"$site\""
+            powershell "New-WebSite -Name \"$site\""    
+        } else {
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] new Web Site method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { New-WebSite -Name \"$site\" }"
+            powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { New-WebSite -Name \"$site\" }"
+        }
+    }
+
+}
+
+
+def removeWebSite(Map map[:], site, server){
+    def debug =  map.debug ?: false
+
+    def exist = webSiteExist(map, site, server)
+    if (exist == false) {
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] remove Web Site method called. Web Site: $site . Message: Web Site not exists"
+    } else {
+        if (server == null) {
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] remove Web Site method called. Web Site: $site . Command: Remove-WebSite -Name \"$site\""
+            powershell "Remove-WebSite -Name \"$site\""    
+        } else {
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] remove Web Site method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { Remove-WebSite -Name \"$site\" }"
+            powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { Remove-WebSite -Name \"$site\" }"
+        }
+    }
+
+}
+
+

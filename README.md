@@ -115,11 +115,11 @@ filesystem.copy debug:true, '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\D
 - [x] Copy files from the windows node to a windows remote machine
 - [ ] Copy artifacts from a job to a windows remote machine
 #### Internet Information Services (IIS)
-- [ ] Start IIS
-- [ ] Stop IIS
-- [ ] Restart IIS
-- [ ] Start application pool
-- [ ] Stop application pool
+- [x] Start IIS
+- [x] Stop IIS
+- [x] Restart IIS
+- [x] Start application pool
+- [x] Stop application pool
 - [ ] Create web site
 - [ ] Remove web site
 - [ ] Edit web site
