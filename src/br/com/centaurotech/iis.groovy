@@ -212,7 +212,7 @@ def webSiteExist(Map map = [:], site, server) {
     return exist
 }
 
-def newWebSite(Map map[:], site, server){
+def newWebSite(Map map = [:], site, server){
     def debug =  map.debug ?: false
 
     def exist = webSiteExist(map, site, server)
@@ -231,7 +231,7 @@ def newWebSite(Map map[:], site, server){
 }
 
 
-def removeWebSite(Map map[:], site, server){
+def removeWebSite(Map map = [:], site, server){
     def debug =  map.debug ?: false
 
     def exist = webSiteExist(map, site, server)
