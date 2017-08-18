@@ -249,4 +249,81 @@ def removeWebSite(Map map[:], site, server){
 
 }
 
+def startWebSite(Map map = [:], site, server) {
+    def debug =  map.debug ?: false
+    def common = new common()
+
+    def exist = webSiteExist(map, site, server)
+    if (exist == false) {
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] start Web Site called. WebSite: $site . Message: WebSite not exists"
+    } else {
+        def statusToStart = common.getstatusToStart()
+        def status = getWebSiteState(map, site, server)
+
+        if (common.isStatusInArray(status, statusToStart)) {
+            if (server == null) {
+                if (debug) echo "[jenkins-windows-library iis] [DEBUG] start Web site method called. Website: $site . Command: Start-WebSite -Name \"$site\""
+                powershell "Start-WebSite -Name \"$site\""    
+            } else {
+                if (debug) echo "[jenkins-windows-library iis] [DEBUG] start Web site method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { Start-WebSite -Name \"$site\" }"
+                powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { Start-WebSite -Name \"$site\" }"
+            }
+        } else {
+             if (debug) echo "[jenkins-windows-library iis] [DEBUG] start Web Site method called. WebSite: $site . Message: WebSite already running"
+            return
+        }
+    }
+}
+
+
+def stopWebSite(Map map = [:], site, server) {
+    def debug =  map.debug ?: false
+    def common = new common()
+
+    def exist = webSiteExist(map, site, server)
+    if (exist == false) {
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] stop Web Site called. WebSite: $site . Message: WebSite not exists"
+    } else {
+        def statusToStart = common.getstatusToStart()
+        def status = getWebSiteState(map, site, server)
+
+        if (common.isStatusInArray(status, statusToStart)) {
+            if (server == null) {
+                if (debug) echo "[jenkins-windows-library iis] [DEBUG] stop Web site method called. Website: $site . Command: Stop-WebSite -Name \"$site\""
+                powershell "Stop-WebSite -Name \"$site\""    
+            } else {
+                if (debug) echo "[jenkins-windows-library iis] [DEBUG] stop Web site method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { Stop-WebSite -Name \"$site\" }"
+                powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { Start-WebSite -Name \"$site\" }"
+            }
+        } else {
+             if (debug) echo "[jenkins-windows-library iis] [DEBUG] stop Web Site method called. WebSite: $site . Message: WebSite already stopped"
+            return
+        }
+    }
+}
+
+def getWebSiteState(Map map = [:], site, server) {
+    def debug =  map.debug ?: false
+
+    def exist = webSiteExist(map, site, server)
+    if (exist == false) {
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] get Web site  state method called. Web site : $site. Message: AppPool not exists"
+    } else {
+        if (server == null) {
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] get Web site  state method called. Web site : $site . Command: Get-WebSiteState -Name \"$site\""
+
+            def pwret = powershell returnStdout: true, script:"Get-WebSiteState  -Name \"$site\""
+            def state = pwret.trim()
+            return state
+        } else {
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] get Web site  state method called. Web site : $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { Get-WebSiteState -Name \"$site\" }"
+
+            def pwret = powershell returnStdout: true, script: "Invoke-Command -ComputerName \"$server\" -ScriptBlock { Get-WebSiteState  -Name \"$site\" }"
+            def state = pwret.trim()
+            return state
+        }
+    }
+}
+
+
 
