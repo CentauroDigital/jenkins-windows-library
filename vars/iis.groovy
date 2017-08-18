@@ -1,3 +1,5 @@
+package br.com.centaurotech
+
 class iis implements Serializable {
 
     def _iis = new br.com.centaurotech.iis()
