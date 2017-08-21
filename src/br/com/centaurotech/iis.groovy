@@ -115,7 +115,7 @@ def newAppPool(Map map = [:], pool, server) {
     if (exist == true) {
         if (debug) echo "[jenkins-windows-library iis] [DEBUG] new app pool method called. AppPool: $pool . Message: AppPool already exists"
     } else {
-        if (server) {
+        if (!server) {
             if (debug) echo "[jenkins-windows-library iis] [DEBUG] new app pool method called. AppPool: $pool . Command: New-WebAppPool -Name \"$pool\""
             powershell "New-WebAppPool -Name \"$pool\""    
         } else {
