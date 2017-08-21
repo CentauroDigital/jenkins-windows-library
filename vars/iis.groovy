@@ -26,7 +26,7 @@ class iis implements Serializable {
         _iis.stopAppPool(map, pool, server)
     }
 
-    def newAppPool(Map map = [:], pool, server = null) {
+    def newAppPool(Map map = [:], pool, server) {
         _iis.newAppPool(map, pool, server)
     }
 
