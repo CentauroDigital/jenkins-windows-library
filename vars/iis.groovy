@@ -1,5 +1,3 @@
-package br.com.centaurotech
-
 class iis implements Serializable {
 
     def _iis = new br.com.centaurotech.iis()
@@ -59,7 +57,7 @@ class iis implements Serializable {
     def startWebSite(Map map = [:], site, server){
         _iis.startWebSite(map,site,server)
     }
-    
+
     def getWebSiteState(Map map = [:], site, server){
         _iis.getWebSiteState(map,site,server)
     }
