@@ -143,7 +143,7 @@ def removeAppPool(Map map = [:], pool, server) {
 }
 
 def appPoolExist(Map map = [:], pool, server) {
-    echo "Debugando"
+  
     def debug =  map.debug ?: false
     def exist =  false
 
