@@ -110,7 +110,7 @@ def stopAppPool(Map map = [:], pool, server) {
 
 def newAppPool(Map map = [:], pool, server = null) {
     def debug =  map.debug ?: false
-    server = "wolfpack01"
+
     def exist = appPoolExist(map, pool, server)
     if (exist == true) {
         if (debug) echo "[jenkins-windows-library iis] [DEBUG] new app pool method called. AppPool: $pool . Message: AppPool already exists"
