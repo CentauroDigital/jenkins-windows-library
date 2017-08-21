@@ -108,7 +108,7 @@ def stopAppPool(Map map = [:], pool, server) {
     }
 }
 
-def newAppPool(Map map = [:], pool, server = null) {
+def newAppPool(Map map = [:], pool, server) {
     def debug =  map.debug ?: false
 
     def exist = appPoolExist(map, pool, server)
