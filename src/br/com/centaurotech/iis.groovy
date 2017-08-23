@@ -160,8 +160,7 @@ def appPoolExist(Map map = [:], pool, server) {
     } else {
         if (debug) echo "[jenkins-windows-library iis] [DEBUG] app pool exist method called. AppPool: $pool . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration  Test-Path \"IIS:\\\\AppPools\\$pool\" }"
 
-        def pwret = powershell returnStdout: true, script:"Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration 
-        Test-Path \"IIS:\\\\AppPools\\$pool\" }"
+        def pwret = powershell returnStdout: true, script:"Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Test-Path \"IIS:\\\\AppPools\\$pool\" }"
         if(debug) echo "AppPoolExist? " + pwret.trim()
         if (pwret.trim() == "True") {
             exist = true
