@@ -43,7 +43,7 @@ class iis implements Serializable {
     }
 
     def newWebSite(Map map = [:], site, server,pool) {
-        _iis.newWebSite(map,site,server)
+        _iis.newWebSite(map,site,server,pool)
     }
 
     def removeWebSite(Map map = [:], site, server){
