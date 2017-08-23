@@ -42,7 +42,7 @@ class iis implements Serializable {
         _iis.getAppPoolState(map, pool, server)
     }
 
-    def newWebSite(Map map = [:], site, server) {
+    def newWebSite(Map map = [:], site, server,pool) {
         _iis.newWebSite(map,site,server)
     }
 
