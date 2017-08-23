@@ -111,9 +111,11 @@ def stopAppPool(Map map = [:], pool, server) {
 def newAppPool(Map map = [:], pool, server) {
     def debug =  map.debug ?: false
     if (debug) echo "Server name: $server"
+   
     def exist = appPoolExist(map, pool, server)
     if (debug) echo "Server exists: $exist"
-    if (exist == true) {
+    
+    if (exist == false) {
         if (debug) echo "[jenkins-windows-library iis] [DEBUG] new app pool method called. AppPool: $pool . Message: AppPool already exists"
     } else {
         if (!server) {
@@ -215,7 +217,7 @@ def webSiteExist(Map map = [:], site, server) {
     return exist
 }
 
-def newWebSite(Map map = [:], site, server){
+def newWebSite(Map map = [:], site, server, pool){
     def debug =  map.debug ?: false
 
     def exist = webSiteExist(map, site, server)
@@ -226,8 +228,8 @@ def newWebSite(Map map = [:], site, server){
             if (debug) echo "[jenkins-windows-library iis] [DEBUG] new Web Site method called. Web Site: $site . Command: New-WebSite -Name \"$site\""
             powershell "New-WebSite -Name \"$site\""    
         } else {
-            if (debug) echo "[jenkins-windows-library iis] [DEBUG] new Web Site method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { New-WebSite -Name \"$site\" }"
-            powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { New-WebSite -Name \"$site\" }"
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] new Web Site method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { New-WebSite -Name \"$site\"-ApplicationPool \"$pool\" -force }"
+            powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { New-WebSite -Name \"$site\" -ApplicationPool \"$pool\" -force }"
         }
     }
 
@@ -327,6 +329,3 @@ def getWebSiteState(Map map = [:], site, server) {
         }
     }
 }
-
-
-
