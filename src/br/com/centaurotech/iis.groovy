@@ -208,7 +208,7 @@ def webSiteExist(Map map = [:], site, server) {
     } else {
         if (debug) echo "[jenkins-windows-library iis] [DEBUG] WebSite exist method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Test-Path \"IIS:\\\\Sites\\$site\" }"
 
-        def pwret = powershell returnStdout: true, script:"Invoke-Command -ComputerName \"$server\" -ScriptBlock { Test-Path \"IIS:\\\\Sites\\$site\" }"
+        def pwret = powershell returnStdout: true, script:"Invoke-Command -ComputerName \"$server\" -ScriptBlock {import-module webadministration \n Test-Path \"IIS:\\\\Sites\\$site\" }"
         if (pwret.trim() == "True") {
             exist = true
         }
