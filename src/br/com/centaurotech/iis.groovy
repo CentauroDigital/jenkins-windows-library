@@ -372,7 +372,7 @@ def editAppPool(Map map = [:], pool, server,newPool) {
             if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Command:import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$pool\" -Name  aplicationPool\"$pool\" -value \"$newPool\" 
             powershell "New-WebAppPool -Name \"$pool\""    
         } else {
-            if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$pool\" -Name  aplicationPool\"$pool\" -value \"$newPool\" }"
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$pool\" -Name  aplicationPool $pool -value $newPool\" }"
             powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$pool\" -Name  aplicationPool\"$pool\" -value \"$newPool\" }"
         }
     }
