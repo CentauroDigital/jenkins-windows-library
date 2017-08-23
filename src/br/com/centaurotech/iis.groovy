@@ -115,7 +115,7 @@ def newAppPool(Map map = [:], pool, server) {
     def exist = appPoolExist(map, pool, server)
     if (debug) echo "Server exists: $exist"
     
-    if (exist == false) {
+    if (exist == true) {
         if (debug) echo "[jenkins-windows-library iis] [DEBUG] new app pool method called. AppPool: $pool . Message: AppPool already exists"
     } else {
         if (!server) {
@@ -158,7 +158,8 @@ def appPoolExist(Map map = [:], pool, server) {
             exist = true
         }
     } else {
-        if (debug) echo "[jenkins-windows-library iis] [DEBUG] app pool exist method called. AppPool: $pool . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { Test-Path \"IIS:\\\\AppPools\\$pool\" }"
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] app pool exist method called. AppPool: $pool . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration 
+        Test-Path \"IIS:\\\\AppPools\\$pool\" }"
 
         def pwret = powershell returnStdout: true, script:"Invoke-Command -ComputerName \"$server\" -ScriptBlock { Test-Path \"IIS:\\\\AppPools\\$pool\" }"
         if(debug) echo "AppPoolExist? " + pwret.trim()
@@ -206,7 +207,8 @@ def webSiteExist(Map map = [:], site, server) {
             exist = true
         }
     } else {
-        if (debug) echo "[jenkins-windows-library iis] [DEBUG] WebSite exist method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { Test-Path \"IIS:\\\\Sites\\$site\" }"
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] WebSite exist method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration 
+        Test-Path \"IIS:\\\\Sites\\$site\" }"
 
         def pwret = powershell returnStdout: true, script:"Invoke-Command -ComputerName \"$server\" -ScriptBlock { Test-Path \"IIS:\\\\Sites\\$site\" }"
         if (pwret.trim() == "True") {
