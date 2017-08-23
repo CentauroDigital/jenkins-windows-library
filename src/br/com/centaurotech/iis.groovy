@@ -329,3 +329,51 @@ def getWebSiteState(Map map = [:], site, server) {
         }
     }
 }
+
+
+
+def editWebSite(Map map = [:], site, server, newSite) {
+    def debug =  map.debug ?: false
+    def common = new common()
+
+    def exist = webSiteExist(map, site, server)
+    if (exist == false) {
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] start Web Site called. WebSite: $site . Message: WebSite not exists"
+    } else {
+        def statusToStart = common.getstatusToStart()
+        def status = getWebSiteState(map, site, server)
+
+        if (common.isStatusInArray(status, statusToStart)) {
+            if (server == null) {
+                if (debug) echo "[jenkins-windows-library iis] [DEBUG] start Web site method called. Website: $site . Command: Start-WebSite -Name \"$site\""
+                powershell "Start-WebSite -Name \"$site\""    
+            } else {
+                if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$site\" -Name  aplicationPool\"$site\" -value \"$newSite\" }"
+                powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { Start-WebSite -Name \"$site\" }"
+            }
+        } else {
+             if (debug) echo "[jenkins-windows-library iis] [DEBUG] start Web Site method called. WebSite: $site . Message: WebSite already running"
+            return
+        }
+    }
+}
+
+def editAppPool(Map map = [:], pool, server,newPool) {
+    def debug =  map.debug ?: false
+    if (debug) echo "Server name: $server"
+   
+    def exist = appPoolExist(map, pool, server)
+    if (debug) echo "Server exists: $exist"
+    
+    if (exist == true) {
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Message: AppPool already exists"
+    } else {
+        if (!server) {
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Command:import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$pool\" -Name  aplicationPool\"$pool\" -value \"$newPool\" 
+            powershell "New-WebAppPool -Name \"$pool\""    
+        } else {
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$pool\" -Name  aplicationPool\"$pool\" -value \"$newPool\" }"
+            powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$pool\" -Name  aplicationPool\"$pool\" -value \"$newPool\" }"
+        }
+    }
+}
