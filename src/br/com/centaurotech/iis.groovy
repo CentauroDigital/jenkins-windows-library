@@ -348,7 +348,7 @@ def editWebSite(Map map = [:], site, server, newSite) {
                 if (debug) echo "[jenkins-windows-library iis] [DEBUG] start Web site method called. Website: $site . Command: Start-WebSite -Name \"$site\""
                 powershell "Start-WebSite -Name \"$site\""    
             } else {
-                if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. WebSite: $site . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$site\" -Name  aplicationPool\"$site\" -value \"$newSite\" }"
+                if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$site\" -Name  aplicationPool\"$site\" -value \"$newPool\" }"
                 powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { Start-WebSite -Name \"$site\" }"
             }
         } else {
@@ -358,7 +358,7 @@ def editWebSite(Map map = [:], site, server, newSite) {
     }
 }
 
-def editAppPool(Map map = [:], pool, server,newPool) {
+def editAppPool(Map map = [:], pool, server,newPool,site) {
     def debug =  map.debug ?: false
     if (debug) echo "Server name: $server"
    
@@ -369,11 +369,11 @@ def editAppPool(Map map = [:], pool, server,newPool) {
         if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Message: AppPool already exists"
     } else {
         if (!server) {
-            if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Command:import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$pool\" -Name  aplicationPool\"$pool\" -value \"$newPool\" 
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Command: New-WebAppPool -Name \"$pool\""
             powershell "New-WebAppPool -Name \"$pool\""    
         } else {
-            if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$pool\" -Name  aplicationPool $pool -value $newPool\" }"
-            powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Set-ItemProperty \"IIS\\\\AppPools\\\"$pool\" -Name  aplicationPool\"$pool\" -value \"$newPool\" }"
+            if (debug) echo "[jenkins-windows-library iis] [DEBUG] edit app pool method called. AppPool: $pool . Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { import-module webadministration \n Set-ItemProperty \"IIS\\\\Sites\\\"$site\" -Name  aplicationPool\"$pool\" -value \"$newPool\" }"
+            powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { New-WebAppPool -Name \"$pool\" }"
         }
     }
 }
