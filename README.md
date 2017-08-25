@@ -128,6 +128,145 @@ filesystem.copy 'C:\\Default\\RemoteFile.txt', '\\\\RemoteMachine\\Default'
 filesystem.copy('C:\\Default\\RemoteFile.txt', '\\\\RemoteMachine\\Default')
 ```
 
+### IIS
+Manage internet services
+
+#### Start W3svc
+Start W3svc from remote machine
+```groovy
+iis.start 'RemoteMachine'
+```groovy
+iis.start debug: true, 'RemoteMachine'
+```
+
+#### Stop W3svc
+Stop W3svc from remote machine
+```groovy
+iis.stop 'RemoteMachine'
+```groovy
+//or with debug param
+iis.stop debug: true, 'RemoteMachine'
+```
+
+#### Restart W3svc
+Stop W3svc from remote machine
+```groovy
+iis.stop 'RemoteMachine'
+```groovy
+//or with debug param
+iis.stop debug: true, 'RemoteMachine'
+```
+
+#### Start AplicationPool
+Start Aplication Pool from remote machine
+```groovy
+iis.startAppPool 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.startAppPool debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### Stop AplicationPool
+Stop Aplication Pool from remote machine
+```groovy
+iis.stopAppPool 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.stopAppPool debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### Restart AplicationPool
+Restart Aplication Pool from remote machine
+```groovy
+iis.stopAppPool 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.stopAppPool debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### AplicationPool Exist
+Verify if an application pool exist
+```groovy
+iis.appPoolExist 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.appPoolExist debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### AplicationPool State
+Verify if an application pool state
+```groovy
+iis.getAppPoolState 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.getAppPoolState debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### New AplicationPool
+Create a new aplication pool
+```groovy
+iis.newAppPool 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.newAppPool debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### Remove AplicationPool
+Remove an aplication pool
+```groovy
+iis.removeAppPool 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.removeAppPool debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### Start WebSite
+Start Web Site from remote machine
+```groovy
+iis.startWebSite 'WebSiteName','RemoteMachine'
+```groovy
+//or with debug param
+iis.startWebSite debug: true, 'WebSiteName','RemoteMachine'
+```
+
+#### Stop WebSite
+Stop Web Site from remote machine
+```groovy
+iis.stopWebSite 'WebSiteName','RemoteMachine'
+```groovy
+//or with debug param
+iis.stopWebSite debug: true, 'WebSiteName','RemoteMachine'
+```
+
+
+#### New WebSite
+Create a new Web Site on a remote machine
+```groovy
+iis.newWebSite 'WebSiteName','RemoteMachine'
+```groovy
+//or with debug param
+iis.newWebSite debug: true, 'WebSiteName','RemoteMachine'
+```
+
+
+#### New WebSite
+Remove a new Web Site from a remote machine
+```groovy
+iis.removeWebSite 'WebSiteName','RemoteMachine'
+```groovy
+//or with debug param
+iis.removeWebSite debug: true, 'WebSiteName','RemoteMachine'
+```
+
+#### WebSite State
+Verify WebSite pool state
+```groovy
+iis.getWebSiteState 'WebSiteName','RemoteMachine'
+```groovy
+//or with debug param
+iis.getWebSiteState debug: true, 'WebSiteName','RemoteMachine'
+```
+
 > Note that the "\\" bar is an escape character, so it should be duplicated.
 
 ### Debuging
@@ -166,6 +305,7 @@ windowsservice.start('localhost', 'wmiApSrv', debug:true)
 - [x] Manage files and folders on a remote windows host
 - [x] Copy files from the windows node to a windows remote machine
 - [ ] Copy artifacts from a job to a windows remote machine
+<<<<<<< HEAD
 
 ### Internet Information Services (IIS) features
 
@@ -176,10 +316,20 @@ windowsservice.start('localhost', 'wmiApSrv', debug:true)
 - [ ] Stop application pool
 - [ ] Create web site
 - [ ] Remove web site
+=======
+#### Internet Information Services (IIS)
+- [x] Start IIS
+- [x] Stop IIS
+- [x] Restart IIS
+- [x] Start application pool
+- [x] Stop application pool
+- [x] Create web site
+- [x] Remove web site
+>>>>>>> feature/iis_management
 - [ ] Edit web site
-- [ ] Create application pool
-- [ ] Remove application pool
-- [ ] Edis application pool
+- [x] Create application pool
+- [x] Remove application pool
+- [ ] Edit application pool
 
 ## Access control
 
