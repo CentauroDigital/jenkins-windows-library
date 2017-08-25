@@ -135,7 +135,7 @@ Manage internet services
 Start W3svc from remote machine
 ```groovy
 iis.start 'RemoteMachine'
-```groovy
+//or with debug param
 iis.start debug: true, 'RemoteMachine'
 ```
 
@@ -143,16 +143,14 @@ iis.start debug: true, 'RemoteMachine'
 Stop W3svc from remote machine
 ```groovy
 iis.stop 'RemoteMachine'
-```groovy
 //or with debug param
 iis.stop debug: true, 'RemoteMachine'
 ```
 
 #### Restart W3svc
-Stop W3svc from remote machine
+Restart W3svc from remote machine
 ```groovy
 iis.stop 'RemoteMachine'
-```groovy
 //or with debug param
 iis.stop debug: true, 'RemoteMachine'
 ```
@@ -161,7 +159,6 @@ iis.stop debug: true, 'RemoteMachine'
 Start Aplication Pool from remote machine
 ```groovy
 iis.startAppPool 'AppPoolName','RemoteMachine'
-```groovy
 //or with debug param
 iis.startAppPool debug: true, 'AppPoolName','RemoteMachine'
 ```
@@ -170,7 +167,6 @@ iis.startAppPool debug: true, 'AppPoolName','RemoteMachine'
 Stop Aplication Pool from remote machine
 ```groovy
 iis.stopAppPool 'AppPoolName','RemoteMachine'
-```groovy
 //or with debug param
 iis.stopAppPool debug: true, 'AppPoolName','RemoteMachine'
 ```
@@ -179,7 +175,6 @@ iis.stopAppPool debug: true, 'AppPoolName','RemoteMachine'
 Restart Aplication Pool from remote machine
 ```groovy
 iis.stopAppPool 'AppPoolName','RemoteMachine'
-```groovy
 //or with debug param
 iis.stopAppPool debug: true, 'AppPoolName','RemoteMachine'
 ```
@@ -188,7 +183,6 @@ iis.stopAppPool debug: true, 'AppPoolName','RemoteMachine'
 Verify if an application pool exist
 ```groovy
 iis.appPoolExist 'AppPoolName','RemoteMachine'
-```groovy
 //or with debug param
 iis.appPoolExist debug: true, 'AppPoolName','RemoteMachine'
 ```
@@ -197,7 +191,6 @@ iis.appPoolExist debug: true, 'AppPoolName','RemoteMachine'
 Verify if an application pool state
 ```groovy
 iis.getAppPoolState 'AppPoolName','RemoteMachine'
-```groovy
 //or with debug param
 iis.getAppPoolState debug: true, 'AppPoolName','RemoteMachine'
 ```
@@ -206,7 +199,6 @@ iis.getAppPoolState debug: true, 'AppPoolName','RemoteMachine'
 Create a new aplication pool
 ```groovy
 iis.newAppPool 'AppPoolName','RemoteMachine'
-```groovy
 //or with debug param
 iis.newAppPool debug: true, 'AppPoolName','RemoteMachine'
 ```
@@ -215,7 +207,6 @@ iis.newAppPool debug: true, 'AppPoolName','RemoteMachine'
 Remove an aplication pool
 ```groovy
 iis.removeAppPool 'AppPoolName','RemoteMachine'
-```groovy
 //or with debug param
 iis.removeAppPool debug: true, 'AppPoolName','RemoteMachine'
 ```
@@ -224,7 +215,6 @@ iis.removeAppPool debug: true, 'AppPoolName','RemoteMachine'
 Start Web Site from remote machine
 ```groovy
 iis.startWebSite 'WebSiteName','RemoteMachine'
-```groovy
 //or with debug param
 iis.startWebSite debug: true, 'WebSiteName','RemoteMachine'
 ```
@@ -233,7 +223,6 @@ iis.startWebSite debug: true, 'WebSiteName','RemoteMachine'
 Stop Web Site from remote machine
 ```groovy
 iis.stopWebSite 'WebSiteName','RemoteMachine'
-```groovy
 //or with debug param
 iis.stopWebSite debug: true, 'WebSiteName','RemoteMachine'
 ```
@@ -243,26 +232,23 @@ iis.stopWebSite debug: true, 'WebSiteName','RemoteMachine'
 Create a new Web Site on a remote machine
 ```groovy
 iis.newWebSite 'WebSiteName','RemoteMachine'
-```groovy
 //or with debug param
 iis.newWebSite debug: true, 'WebSiteName','RemoteMachine'
 ```
 
 
-#### New WebSite
+#### Remove WebSite
 Remove a new Web Site from a remote machine
 ```groovy
 iis.removeWebSite 'WebSiteName','RemoteMachine'
-```groovy
 //or with debug param
 iis.removeWebSite debug: true, 'WebSiteName','RemoteMachine'
 ```
 
 #### WebSite State
-Verify WebSite pool state
+Verify WebSite state
 ```groovy
 iis.getWebSiteState 'WebSiteName','RemoteMachine'
-```groovy
 //or with debug param
 iis.getWebSiteState debug: true, 'WebSiteName','RemoteMachine'
 ```
