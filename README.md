@@ -100,6 +100,145 @@ filesystem.copy '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\Default'
 filesystem.copy debug:true, '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\Default'
 ```
 
+### IIS
+Manage internet services
+
+#### Start W3svc
+Start W3svc from remote machine
+```groovy
+iis.start 'RemoteMachine'
+```groovy
+iis.start debug: true, 'RemoteMachine'
+```
+
+#### Stop W3svc
+Stop W3svc from remote machine
+```groovy
+iis.stop 'RemoteMachine'
+```groovy
+//or with debug param
+iis.stop debug: true, 'RemoteMachine'
+```
+
+#### Restart W3svc
+Stop W3svc from remote machine
+```groovy
+iis.stop 'RemoteMachine'
+```groovy
+//or with debug param
+iis.stop debug: true, 'RemoteMachine'
+```
+
+#### Start AplicationPool
+Start Aplication Pool from remote machine
+```groovy
+iis.startAppPool 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.startAppPool debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### Stop AplicationPool
+Stop Aplication Pool from remote machine
+```groovy
+iis.stopAppPool 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.stopAppPool debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### Restart AplicationPool
+Restart Aplication Pool from remote machine
+```groovy
+iis.stopAppPool 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.stopAppPool debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### AplicationPool Exist
+Verify if an application pool exist
+```groovy
+iis.appPoolExist 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.appPoolExist debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### AplicationPool State
+Verify if an application pool state
+```groovy
+iis.getAppPoolState 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.getAppPoolState debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### New AplicationPool
+Create a new aplication pool
+```groovy
+iis.newAppPool 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.newAppPool debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### Remove AplicationPool
+Remove an aplication pool
+```groovy
+iis.removeAppPool 'AppPoolName','RemoteMachine'
+```groovy
+//or with debug param
+iis.removeAppPool debug: true, 'AppPoolName','RemoteMachine'
+```
+
+#### Start WebSite
+Start Web Site from remote machine
+```groovy
+iis.startWebSite 'WebSiteName','RemoteMachine'
+```groovy
+//or with debug param
+iis.startWebSite debug: true, 'WebSiteName','RemoteMachine'
+```
+
+#### Stop WebSite
+Stop Web Site from remote machine
+```groovy
+iis.stopWebSite 'WebSiteName','RemoteMachine'
+```groovy
+//or with debug param
+iis.stopWebSite debug: true, 'WebSiteName','RemoteMachine'
+```
+
+
+#### New WebSite
+Create a new Web Site on a remote machine
+```groovy
+iis.newWebSite 'WebSiteName','RemoteMachine'
+```groovy
+//or with debug param
+iis.newWebSite debug: true, 'WebSiteName','RemoteMachine'
+```
+
+
+#### New WebSite
+Remove a new Web Site from a remote machine
+```groovy
+iis.removeWebSite 'WebSiteName','RemoteMachine'
+```groovy
+//or with debug param
+iis.removeWebSite debug: true, 'WebSiteName','RemoteMachine'
+```
+
+#### WebSite State
+Verify WebSite pool state
+```groovy
+iis.getWebSiteState 'WebSiteName','RemoteMachine'
+```groovy
+//or with debug param
+iis.getWebSiteState debug: true, 'WebSiteName','RemoteMachine'
+```
+
 > Note that the "\\" bar is an escape character, so it should be duplicated.
 
 ## Roadmap
@@ -120,12 +259,12 @@ filesystem.copy debug:true, '\\\\RemoteMachine\\Default\\RemoteFile.txt', 'C:\\D
 - [x] Restart IIS
 - [x] Start application pool
 - [x] Stop application pool
-- [ ] Create web site
-- [ ] Remove web site
+- [x] Create web site
+- [x] Remove web site
 - [ ] Edit web site
-- [ ] Create application pool
-- [ ] Remove application pool
-- [ ] Edis application pool
+- [x] Create application pool
+- [x] Remove application pool
+- [ ] Edit application pool
 
 ## Access control
 Since the library is executed on the context of the jenkins windows service node, the user running the server must have the correct rights to execute the actions on the remote machine. On a domain based network use a domain user to run the jenkins windows service and give this user the needed access on the managed hosts. If you are not in a domain based network just create a user with the same username and password on the managed machines and give the rights needed access to this user.
