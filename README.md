@@ -295,13 +295,13 @@ windowsservice.start('localhost', 'wmiApSrv', debug:true)
 
 ### Internet Information Services (IIS) features
 
-- [ ] Start IIS
-- [ ] Stop IIS
-- [ ] Restart IIS
-- [ ] Start application pool
-- [ ] Stop application pool
-- [ ] Create web site
-- [ ] Remove web site
+- [x] Start IIS
+- [x] Stop IIS
+- [x] Restart IIS
+- [x] Start application pool
+- [x] Stop application pool
+- [x] Create web site
+- [x] Remove web site
 =======
 #### Internet Information Services (IIS)
 - [x] Start IIS
