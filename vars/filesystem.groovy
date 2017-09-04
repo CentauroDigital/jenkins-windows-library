@@ -8,4 +8,8 @@ class filesystem implements Serializable {
     def fileExist(Map map = [:], path) {
         _filesystem.fileExist(map, path)
     }
+
+     def delete(Map map = [:], path) {
+        _filesystem.delete(map, path)
+    }
 }
