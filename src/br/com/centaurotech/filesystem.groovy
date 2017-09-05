@@ -30,11 +30,10 @@ def fileExist(Map map = [:], path) {
 
 def delete(Map map = [:], path){
     def debug =  map.debug ?: false
-
     if (debug) echo "[jenkins-windows-library file system] [DEBUG] delete method called: from path: $path."
 
     def exist = fileExist(map, path)
     if (exist) {
-        powershell "Remove-Item \"$path\" -force -y"
+        powershell "Remove-Item \"$path\" -force"
     }
 }
