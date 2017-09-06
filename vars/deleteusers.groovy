@@ -3,9 +3,7 @@ class deleteusers implements Serializable {
     
     def delete(Map map = [:], server) {
         def debug =  map.debug ?: false
-        if (debug) {
-            echo "call class deleteusers"
-        }
+        if (debug) echo  "call class deleteusers"
 
         _deleteusers.delete(map, server)
     }
