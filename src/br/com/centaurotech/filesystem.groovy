@@ -14,10 +14,9 @@ def copy(Map map = [:], fromPath, toPath) {
 
 def fileExist(Map map = [:], path) {
     def debug =  map.debug ?: false
-    if (debug) echo "[jenkins-windows-library file system] [DEBUG] file exist method called: path: $path"
 
     def pwret = powershell returnStdout: true, script:"Test-Path \"$path\""
-    if (debug) echo "[jenkins-windows-library file system] [DEBUG] file exist method called: exist: $pwret"
+    if (debug) echo "[jenkins-windows-library file system] [DEBUG] file exist method called. Command: Test-Path \"$path\" File exist: $pwret"
 
 	def exist =  false
     if (pwret != null) {
@@ -25,6 +24,7 @@ def fileExist(Map map = [:], path) {
             exist = true
         }
     }
+
     return exist
 }
 
