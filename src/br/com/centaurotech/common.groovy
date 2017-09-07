@@ -15,3 +15,10 @@ def getstatusToStart() {
 def getStatusToStop() {
     return ["Running", "StartPending", "ContinuePending", "PausePending", "Paused"]
 }
+
+def properties = properties([
+    buildDiscarder(logRotator(artifactDaysToKeepStr: '15', artifactNumToKeepStr: '10', daysToKeepStr: '15', numToKeepStr: '10')),
+    disableConcurrentBuilds(),
+    [$class: 'CopyArtifactPermissionProperty', projectNames: '*'], 
+    parameters([string(defaultValue: 'false', description: '', name: 'Debug')]), 
+    pipelineTriggers([pollSCM('H/5 * * * *')])])
