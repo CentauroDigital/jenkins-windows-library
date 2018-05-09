@@ -17,10 +17,10 @@ def stop(Map map = [:], server) {
 
     if (server == null) {
         if (debug) echo "[jenkins-windows-library iis] [DEBUG] stop method called. Command: Stop-Service W3SVC"
-        powershell "Stop-Service W3SVC"
+        powershell "Stop-Service W3SVC -Force"
     } else {
         if (debug) echo "[jenkins-windows-library iis] [DEBUG] stop method called. Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { Stop-Service W3SVC }"
-        powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { Stop-Service W3SVC }"
+        powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { Stop-Service W3SVC -Force }"
     }
 }
 
