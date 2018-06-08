@@ -4,11 +4,11 @@ def start(Map map = [:], server) {
     def debug =  map.debug ?: false
 
     if (server == null) {
-        if (debug) echo "[jenkins-windows-library iis] [DEBUG] start method called. Command: Start-Service W3SVC"
-        powershell "Start-Service W3SVC"
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] start method called. Command: iisreset /start"
+        powershell "iisreset /start"
     } else {
-        if (debug) echo "[jenkins-windows-library iis] [DEBUG] start method called. Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { Start-Service W3SVC }"
-        powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { Start-Service W3SVC }"
+        if (debug) echo "[jenkins-windows-library iis] [DEBUG] start method called. Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { iisreset /start }"
+        powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { iisreset /start }"
     }
 }
 
@@ -17,10 +17,10 @@ def stop(Map map = [:], server) {
 
     if (server == null) {
         if (debug) echo "[jenkins-windows-library iis] [DEBUG] stop method called. Command: Stop-Service W3SVC"
-        powershell "Stop-Service W3SVC -Force"
+        powershell "iisreset /stop"
     } else {
         if (debug) echo "[jenkins-windows-library iis] [DEBUG] stop method called. Command: Invoke-Command -ComputerName \"$server\" -ScriptBlock { Stop-Service W3SVC }"
-        powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { Stop-Service W3SVC -Force }"
+        powershell "Invoke-Command -ComputerName \"$server\" -ScriptBlock { iisreset /stop }"
     }
 }
 
