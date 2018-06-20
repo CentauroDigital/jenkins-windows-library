@@ -88,8 +88,9 @@ def stop(Map map = [:], hostName, serviceName) {
 	def statusToStop = common.getStatusToStop()
 
 	if(common.isStatusInArray(status, statusToStop)){
-		echo "[jenkins-windows-library windows service] Stopping the service $serviceName on $hostName host."
-		powershell "(get-service -ComputerName $hostName -Name $serviceName).Stop()"
+		echo "[jenkins-windows-library windows service] Stopping the service $serviceName on $hostName host and Killing the Process!."
+		powershell "Invoke-Command -ComputerName $hostName -ScriptBlock { (get-process -Name $serviceName).Kill() }"
+		
 	}else{
 		echo "[jenkins-windows-library windows service] Service $serviceName alerady stopped on $hostName host."
 		return
