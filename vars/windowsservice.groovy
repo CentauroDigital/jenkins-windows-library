@@ -13,7 +13,7 @@ class windowsservice implements Serializable {
          _windowsservice.start(map, hostName, serviceName)
     }
 
-    def stop(Map map = [:], hostName, serviceName) {
-        _windowsservice.stop(map, hostName, serviceName)
+    def stop(Map map = [:], hostName, serviceName, processName) {
+        _windowsservice.stop(map, hostName, serviceName, processName)
     }
 }
