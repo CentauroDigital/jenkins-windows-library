@@ -73,7 +73,7 @@ def start(Map map = [:], hostName, serviceName) {
 	echo "[jenkins-windows-library windows service] Service $serviceName started on $hostName host."
 }
 
-def stop(Map map = [:], hostName, serviceName) {
+def stop(Map map = [:], hostName, serviceName, processName) {
 	def debug =  map.debug ?: false
 	def timeout =  map.timeout ?: 60
 	def force =  map.force ?: false
@@ -89,7 +89,7 @@ def stop(Map map = [:], hostName, serviceName) {
 
 	if(common.isStatusInArray(status, statusToStop)){
 		echo "[jenkins-windows-library windows service] Stopping the service $serviceName on $hostName host and Killing the Process!."
-		powershell "Invoke-Command -ComputerName $hostName -ScriptBlock { (get-process -Name $serviceName).Kill() }"
+		powershell "Invoke-Command -ComputerName $hostName -ScriptBlock { (get-process -Name $processName).Kill() }"
 		
 	}else{
 		echo "[jenkins-windows-library windows service] Service $serviceName alerady stopped on $hostName host."
